@@ -13,14 +13,14 @@ func TestBeefService(t *testing.T) {
 	t.Run("Count bacon", func(t *testing.T) {
 		mockClient := new(mocks.HttpClient)
 		srv := NewBeefService(mockClient)
-		sr := strings.NewReader(`"beef beef bacon beef bacon"`)
+		sr := strings.NewReader(`"beef beef ribeye beef ribeye"`)
 		src := io.NopCloser(sr)
 		resp := &http.Response{Status: "200", Body: src}
 		mockClient.On("Do", mock.Anything).Return(resp, nil).Once()
 		actual := srv.Count()
 
-		if actual["bacon"] != 2 {
-			t.Error("bacon should be 2")
+		if actual["ribeye"] != 2 {
+			t.Error("ribeye should be 2")
 		}
 	})
 
